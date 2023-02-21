@@ -2,60 +2,42 @@
 
 using UnityEngine;
 
+using static UnityEngine.GraphicsBuffer;
+
 public enum Direction
 {
-    Up,
-    Down,
-    Left,
-    Right,
+	Up,
+	Down,
+	Left,
+	Right,
 
-    COUNT
+	COUNT
 }
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent( typeof( ActorController ) )]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    [Range( 0.1f, 1000.0f)]
-    float m_speed = 5.0f;
+	private ActorController m_actcon;
 
-    Rigidbody m_rb;
-    Vector3   m_facing;
-
-    void Awake()
-    {
-        m_rb     = GetComponent<Rigidbody>();
-        m_facing = GetComponent<Transform>().forward;
-    }
-
-    void Update()
-    {
-        var moveinput = new Vector3( Input.GetAxis( "MoveX" ), 0.0f, Input.GetAxis( "MoveY" ) );
-		var lookinput = new Vector3( Input.GetAxis( "LookX" ), 0.0f, Input.GetAxis( "LookY" ) );
-        
-        GetComponent<Transform>().forward = m_facing;
-        
-        if( moveinput.magnitude > 1.0f )
-			moveinput = moveinput.normalized;
-		if( lookinput.magnitude > 1.0f )
-			lookinput = lookinput.normalized;
-
-        if( lookinput != Vector3.zero )
-			m_facing = lookinput;
-
-        m_rb.AddForce( m_speed * moveinput * 10.0f, ForceMode.Force );
-
-        var vel = new Vector2( m_rb.velocity.x, m_rb.velocity.z );
-
-        if( vel.magnitude > m_speed )
-        {
-            var limit = vel.normalized * m_speed;
-            m_rb.velocity = new Vector3( limit.x, m_rb.velocity.y, limit.y );
-        }
+	private void Awake()
+	{
+		m_actcon = GetComponent<ActorController>();
 	}
 
-	private void OnDrawGizmos()
+	private void Update()
 	{
-        Debug.DrawLine( GetComponent<Transform>().position, GetComponent<Transform>().position + ( m_facing * 2.0f ), Color.magenta );
+		m_actcon.MoveInput = new Vector2( Input.GetAxis( "MoveX" ), Input.GetAxis( "MoveY" ) );
+		m_actcon.LookInput = new Vector2( Input.GetAxis( "LookX" ), Input.GetAxis( "LookY" ) );
+		m_actcon.FireInput = Input.GetAxis( "Fire" ) > 0.6f;
+
+		if( Input.GetAxis( "Mouse X" ) != 0 || Input.GetAxis( "Mouse Y" ) != 0 )
+		{
+			var mpos   = Input.mousePosition;
+			var objpos = Camera.main.WorldToScreenPoint( transform.position );
+			m_actcon.LookInput = mpos - objpos;
+		}
+
+		if( Input.GetKeyDown( KeyCode.Space ) )
+			m_actcon.SetAbility( m_actcon.AbilityIndex + 1 );
 	}
 }

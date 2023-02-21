@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 67ebaa9be18012e4cb6fbf6c536e391c
+  m_SerializeEntries:
+  - m_GUID: d1dd51f2d7cbc674788f0387c9fdbb1d
+    m_Address: Assets/Database/abilities.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 696d47f2490208b44a4ec01c7d4356dd
+    m_Address: Assets/Database/actors.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77f7d5cc82d7d414f88cef0e55475714
+    m_Address: Assets/Database/players.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4a54b0ad11a1c4b4b89ae4a9ea74f1c3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d83e4e0907d54c4478ef3b8efc3fc183, type: 2}
+    - {fileID: 11400000, guid: 0be74857f1786b3488b3d70b0ae14de5, type: 2}
